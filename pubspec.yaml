@@ -7,6 +7,8 @@ environment:
 
 dependencies: 
   cupertino_icons: ^1.0.2
+  device_frame:
+  google_fonts:
   iconly: ^1.0.1
   get: 4.6.5
   flutter: 

@@ -1,5 +1,4 @@
-import 'package:akash/app/modules/profile/views/addresses_view.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:akash/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,133 +13,127 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: Icon(IconlyLight.search)),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.clear_circled))
-        ],
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(IconlyLight.arrow_left),
+        ),
       ),
-      body: Column(
+      body: ListView(
         children: [
-          const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const CircleAvatar(
-                  radius: 28,
-                  backgroundImage: NetworkImage(
-                      "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(
+                  "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
                 ),
-                const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Welcome',
-                      style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.normal),
-                    ),
-                    Text(
-                      'Yash Sarankar',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                IconButton(
-                  style: ButtonStyle(alignment: Alignment.bottomCenter),
-                  onPressed: () {},
-                  icon: const Icon(IconlyLight.logout),
-                ),
-              ],
-            ),
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(IconlyLight.profile),
-            title: const Text("Account"),
-            trailing: const Icon(IconlyLight.arrow_right_2),
-            onTap: () {
-              Get.to(const AccountView());
-            },
-          ),
-          ListTile(
-            leading: Icon(IconlyLight.location),
-            title: Text("My Addresses"),
-            trailing: Icon(IconlyLight.arrow_right_2),
-            onTap: () {
-              Get.to(const AddressesView());
-            },
-          ),
-          ListTile(
-            leading: Icon(IconlyLight.lock),
-            title: Text("Security"),
-            trailing: Icon(IconlyLight.arrow_right_2),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(IconlyLight.setting),
-            title: Text("Settings"),
-            trailing: Icon(IconlyLight.arrow_right_2),
-            onTap: () {},
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  radius: 100,
-                  onTap: () {},
-                  child: Text("Privacy Policy", style: TextStyle(fontSize: 12)),
-                ),
-                const Icon(
-                  IconlyLight.arrow_right_2,
-                  size: 12,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                InkWell(
-                  child:
-                      const Text("Help Center", style: TextStyle(fontSize: 12)),
-                  onTap: () {},
-                ),
-                const Icon(
-                  IconlyLight.arrow_right_2,
-                  size: 12,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                InkWell(
-                  child: const Text("Term & Conditions",
-                      style: TextStyle(fontSize: 12)),
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-          const Divider(height: 35,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.copyright,size: 16,),
-              SizedBox(
-                width: 4,
               ),
+              const SizedBox(height: 16),
               Text(
-                "Akash Megamart",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-              )
+                'John Doe',
+                style: context.textTheme.titleLarge,
+              ),
+              const SizedBox(height: 2),
+              Text(
+                '+91 1234567890',
+                style: context.textTheme.bodyLarge,
+              ),
             ],
           ),
-          const SizedBox(
-            height: 20,
+          const SizedBox(height: 30),
+          ListTile(
+            leading: const SizedBox(
+                height: double.infinity, child: Icon(IconlyLight.profile)),
+            title: const Text("Account"),
+            subtitle: const Text("Manage your account"),
+            trailing: const Icon(IconlyLight.arrow_right_2),
+            onTap: () {
+              Get.toNamed(Routes.ACCOUNT);
+            },
           ),
+          ListTile(
+            leading: const SizedBox(
+                height: double.infinity, child: Icon(IconlyLight.location)),
+            title: const Text("My Addresses"),
+            subtitle: const Text("Office, home, other"),
+            trailing: const Icon(IconlyLight.arrow_right_2),
+            onTap: () {
+              Get.toNamed(Routes.ADDRESSES);
+            },
+          ),
+          ListTile(
+            leading: const SizedBox(
+                height: double.infinity, child: Icon(IconlyLight.bag_2)),
+            title: const Text("Orders"),
+            subtitle: const Text("Check your order status"),
+            trailing: const Icon(IconlyLight.arrow_right_2),
+            onTap: () {
+            },
+          ),
+          ListTile(
+            leading: const SizedBox(
+                height: double.infinity, child: Icon(IconlyLight.buy)),
+            title: const Text("Wishlist"),
+            subtitle: const Text("Your favourite products"),
+            trailing: const Icon(IconlyLight.arrow_right_2),
+            onTap: () {
+            },
+          ),
+          ListTile(
+            leading: const SizedBox(
+                height: double.infinity, child: Icon(IconlyLight.lock)),
+            title: const Text("Security"),
+            subtitle: const Text("Change password, PIN"),
+            trailing: const Icon(IconlyLight.arrow_right_2),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const SizedBox(
+                height: double.infinity, child: Icon(IconlyLight.setting)),
+            title: const Text("Settings"),
+            subtitle: const Text("Dark mode, notification etc."),
+            trailing: const Icon(IconlyLight.arrow_right_2),
+            onTap: () {
+              Get.toNamed(Routes.SETTINGS);
+            },
+          ),
+          const SizedBox(height: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: OutlinedButton(
+              onPressed: () async {},
+              style: ButtonStyle(
+                side: MaterialStateProperty.all(
+                  BorderSide(color: Get.theme.colorScheme.error),
+                ),
+                overlayColor: MaterialStateProperty.all(
+                    Get.theme.colorScheme.errorContainer),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Text(
+                  "LOG OUT",
+                  style: Get.textTheme.bodyMedium?.copyWith(
+                    color: Get.theme.colorScheme.error,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(
+              top: 30,
+              right: 20,
+              bottom: 100,
+              left: 20,
+            ),
+            child: Text(
+              "APP VERSION 1.0.0",
+            ),
+          )
         ],
       ),
     );
