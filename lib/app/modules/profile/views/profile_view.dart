@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import '../controllers/profile_controller.dart';
-import 'account_view.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({Key? key}) : super(key: key);
@@ -23,6 +22,7 @@ class ProfileView extends GetView<ProfileController> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const SizedBox(height:10),
               const CircleAvatar(
                 radius: 50,
                 backgroundImage: NetworkImage(
@@ -98,25 +98,15 @@ class ProfileView extends GetView<ProfileController> {
               Get.toNamed(Routes.SETTINGS);
             },
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: OutlinedButton(
               onPressed: () async {},
-              style: ButtonStyle(
-                side: MaterialStateProperty.all(
-                  BorderSide(color: Get.theme.colorScheme.error),
-                ),
-                overlayColor: MaterialStateProperty.all(
-                    Get.theme.colorScheme.errorContainer),
-              ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Text(
                   "LOG OUT",
-                  style: Get.textTheme.bodyMedium?.copyWith(
-                    color: Get.theme.colorScheme.error,
-                  ),
                 ),
               ),
             ),
@@ -127,7 +117,7 @@ class ProfileView extends GetView<ProfileController> {
             margin: const EdgeInsets.only(
               top: 30,
               right: 20,
-              bottom: 100,
+              bottom: 50,
               left: 20,
             ),
             child: Text(

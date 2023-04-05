@@ -10,6 +10,7 @@ dependencies:
   device_frame:
   google_fonts:
   iconly: ^1.0.1
+  lottie: ^2.3.1
   get: 4.6.5
   flutter: 
     sdk: flutter
@@ -22,5 +23,6 @@ dev_dependencies:
 flutter: 
   uses-material-design: true
   assets:
-    - assets/icons/
+    - assets/
+    - assets/lotties/
 

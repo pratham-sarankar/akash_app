@@ -1,5 +1,4 @@
-import 'package:akash/app/data/themes/default/dark.dart';
-import 'package:akash/app/data/themes/default/light.dart';
+import 'package:akash/app/data/themes/default/default_theme.dart';
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +26,8 @@ void main() {
           orientation: Orientation.portrait,
         );
       },
-      theme: defaultLightTheme,
-      darkTheme: defaultDarkTheme,
+      theme: DefaultTheme.light,
+      darkTheme: DefaultTheme.dark,
     ),
   );
 }
