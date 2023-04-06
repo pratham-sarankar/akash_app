@@ -1,4 +1,5 @@
 import 'package:akash/app/modules/auth/views/login_view.dart';
+import 'package:akash/app/modules/auth/views/otp_view.dart';
 import 'package:akash/app/modules/auth/views/register_view.dart';
 import 'package:akash/app/modules/profile/views/security_view.dart';
 import 'package:flutter/animation.dart';
@@ -23,7 +24,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.PROFILE;
+  static const INITIAL = Routes.OTP;
 
   static final routes = [
     GetPage(
@@ -82,6 +83,11 @@ class AppPages {
       name: _Paths.CHANGEPASSWORD,
       page: () => const ChangePasswordView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.OTP,
+      page: () => const OtpView(),
+      binding: AuthBinding(),
     ),
   ];
 }

@@ -11,7 +11,9 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Register"),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -20,10 +22,7 @@ class RegisterView extends GetView<RegisterController> {
             padding: const EdgeInsets.only(right: 20, left: 20),
             child: Column(
               children: [
-                Text(
-                  "Register",
-                  style: context.textTheme.headlineLarge,
-                ),
+
                 const Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child: TextField(

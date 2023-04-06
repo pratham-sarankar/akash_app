@@ -15,25 +15,25 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          Image.network("https://cdn-icons-png.flaticon.com/128/9776/9776506.png"),
+          const SizedBox(height: 30,),
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 20),
             child: Column(
               children: [
-                Text(
-                  "Login",
-                  style: context.textTheme.headlineLarge,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                const Padding(
+                  padding: EdgeInsets.only(top: 30),
                   child: TextField(
                     // controller: controller.phoneNumberController,
                     keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: "Enter your phone",
                       hintText: "+91 97133-12345",
                     ),
@@ -43,7 +43,9 @@ class LoginView extends GetView<LoginController> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 15),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.OTP);
+                    },
                     child: const Text("Proceed"),
                   ),
                 ),
