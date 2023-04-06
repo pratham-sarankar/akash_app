@@ -1,5 +1,6 @@
 import 'package:akash/app/modules/auth/views/login_view.dart';
 import 'package:akash/app/modules/auth/views/register_view.dart';
+import 'package:akash/app/modules/profile/views/security_view.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,7 @@ import '../modules/profile/modules/addresses/bindings/addresses_binding.dart';
 import '../modules/profile/modules/addresses/views/addresses_view.dart';
 import '../modules/profile/modules/settings/bindings/settings_binding.dart';
 import '../modules/profile/modules/settings/views/settings_view.dart';
+import '../modules/profile/views/change_password_view.dart';
 import '../modules/profile/views/profile_view.dart';
 
 part 'app_routes.dart';
@@ -21,7 +23,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.PROFILE;
 
   static final routes = [
     GetPage(
@@ -70,6 +72,16 @@ class AppPages {
       name: _Paths.AUTH,
       page: () => const AuthView(),
       binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.SECURITY,
+      page: () => const SecurityView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGEPASSWORD,
+      page: () => const ChangePasswordView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

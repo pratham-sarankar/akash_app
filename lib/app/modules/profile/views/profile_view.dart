@@ -1,3 +1,4 @@
+import 'package:akash/app/modules/profile/views/security_view.dart';
 import 'package:akash/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -86,7 +87,9 @@ class ProfileView extends GetView<ProfileController> {
             title: const Text("Security"),
             subtitle: const Text("Change password, PIN"),
             trailing: const Icon(IconlyLight.arrow_right_2),
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Routes.SECURITY);
+            },
           ),
           ListTile(
             leading: const SizedBox(
