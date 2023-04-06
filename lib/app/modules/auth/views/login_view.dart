@@ -22,16 +22,18 @@ class LoginView extends GetView<LoginController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          Image.network("https://cdn-icons-png.flaticon.com/128/9776/9776506.png"),
+          const SizedBox(height: 30,),
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 20),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                const Padding(
+                  padding: EdgeInsets.only(top: 30),
                   child: TextField(
                     // controller: controller.phoneNumberController,
                     keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: "Enter your phone",
                       hintText: "+91 97133-12345",
                     ),

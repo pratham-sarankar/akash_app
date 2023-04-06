@@ -11,19 +11,17 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Obx(
-          () {
-        return Scaffold(
-          body: IndexedStack(
-            index: controller.index.value,
-            children: const [
-              ProfileView(),
-              ProfileView(),
-              ProfileView(),
-            ],
-          ),
-        );
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home Page"),
+      ),
+      body:SingleChildScrollView(
+        child: Column(
+          children: [
+
+          ],
+        ),
+      ),
     );
   }
 }

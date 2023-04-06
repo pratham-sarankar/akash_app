@@ -11,14 +11,22 @@ class OtpView extends GetView<OtpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Verify'),
-        centerTitle: true,
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Column(
+            children: [
+              Text("Verification code",style: context.textTheme.titleLarge),
+              const SizedBox(height:10),
+              Text("We have send the code verification \nto +919893333654",style:  context.textTheme.bodyMedium,textAlign: TextAlign.center,),
+            ],
+          ),
+
+          const SizedBox(
+            height: 30,
+          ),
+
           OtpTextField(
             numberOfFields: 6,
             autoFocus: true,
@@ -31,17 +39,19 @@ class OtpView extends GetView<OtpController> {
             borderWidth: 2,
             // onSubmit: (value) {},
           ),
+          const SizedBox(
+            height: 30,
+          ),
+          const Text("Resend code after"),
           const SizedBox(height: 30),
           TextButton(
             onPressed: () {},
             child: const Text("Proceed"),
           ),
-          SizedBox(height: Get.height*0.1),
+          SizedBox(height: Get.height * 0.1),
           const AuthLottieAnimation()
         ],
-
       ),
-
     );
   }
 }
