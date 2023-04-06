@@ -15,7 +15,9 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -24,10 +26,6 @@ class LoginView extends GetView<LoginController> {
             padding: const EdgeInsets.only(right: 20, left: 20),
             child: Column(
               children: [
-                Text(
-                  "Login",
-                  style: context.textTheme.headlineLarge,
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child: TextField(
@@ -43,7 +41,9 @@ class LoginView extends GetView<LoginController> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 15),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.OTP);
+                    },
                     child: const Text("Proceed"),
                   ),
                 ),
