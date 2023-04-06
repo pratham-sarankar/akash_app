@@ -1,14 +1,10 @@
-import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController
-    with GetSingleTickerProviderStateMixin {
-
+class LoginController extends GetxController {
 
   @override
   void onInit() {
     super.onInit();
-
   }
 
   @override

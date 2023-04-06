@@ -1,9 +1,12 @@
+import 'package:akash/app/modules/auth/views/login_view.dart';
+import 'package:akash/app/modules/auth/views/register_view.dart';
+import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
+import '../modules/auth/bindings/auth_binding.dart';
+import '../modules/auth/views/auth_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/login/bindings/login_binding.dart';
-import '../modules/login/views/login_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/modules/account/bindings/account_binding.dart';
 import '../modules/profile/modules/account/views/account_view.dart';
@@ -51,7 +54,22 @@ class AppPages {
     GetPage(
       name: _Paths.LOGIN,
       page: () => const LoginView(),
-      binding: LoginBinding(),
+      binding: AuthBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 50),
+    ),
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => const RegisterView(),
+      binding: AuthBinding(),
+      transition: Transition.fade,
+      transitionDuration: const Duration(milliseconds: 500),
+      curve: Curves.easeIn,
+    ),
+    GetPage(
+      name: _Paths.AUTH,
+      page: () => const AuthView(),
+      binding: AuthBinding(),
     ),
   ];
 }

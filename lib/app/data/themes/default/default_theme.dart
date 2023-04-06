@@ -25,7 +25,8 @@ class DefaultTheme {
           centerTitle: true,
           surfaceTintColor: Color(0xFF121212),
         ),
-        textTheme: GoogleFonts.poppinsTextTheme(Typography.whiteMountainView),
+        textTheme:
+            GoogleFonts.poppinsTextTheme(Typography.material2021().white),
         dividerTheme: const DividerThemeData(
           space: 50,
           endIndent: 20,
@@ -79,14 +80,25 @@ class DefaultTheme {
           brightness: Brightness.light, // Sets the brightness to light
         ),
         scaffoldBackgroundColor: Colors.white, // Color for the app scaffold
-        textTheme: GoogleFonts.poppinsTextTheme(Typography.blackMountainView),
+        textTheme:
+            GoogleFonts.poppinsTextTheme(Typography.material2021().black),
         dividerTheme: const DividerThemeData(
           space: 50,
           endIndent: 20,
           indent: 20,
           thickness: 0.5,
         ),
-
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.orange.shade800,
+            foregroundColor: Colors.white,
+            surfaceTintColor: Colors.orange.shade200,
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             minimumSize: const Size(double.infinity, 50),
