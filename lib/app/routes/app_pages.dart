@@ -1,30 +1,43 @@
-import 'package:akash/app/modules/auth/views/login_view.dart';
-import 'package:akash/app/modules/auth/views/otp_view.dart';
-import 'package:akash/app/modules/auth/views/register_view.dart';
-import 'package:akash/app/modules/profile/views/security_view.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
-import '../modules/auth/bindings/auth_binding.dart';
-import '../modules/auth/views/auth_view.dart';
+import '../data/services/auth_service.dart';
+import '../modules/cart/bindings/cart_binding.dart';
+import '../modules/cart/views/cart_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/modules/account/bindings/account_binding.dart';
 import '../modules/profile/modules/account/views/account_view.dart';
 import '../modules/profile/modules/addresses/bindings/addresses_binding.dart';
+import '../modules/profile/modules/addresses/views/address_form_view.dart';
 import '../modules/profile/modules/addresses/views/addresses_view.dart';
 import '../modules/profile/modules/settings/bindings/settings_binding.dart';
 import '../modules/profile/modules/settings/views/settings_view.dart';
 import '../modules/profile/views/change_password_view.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/profile/views/security_view.dart';
+import '../modules/reset_password/bindings/reset_password_binding.dart';
+import '../modules/reset_password/views/new_password_view.dart';
+import '../modules/reset_password/views/otp_reset_password_view.dart';
+import '../modules/reset_password/views/reset_password_view.dart';
+import '../modules/reset_password/views/success_reset_password_view.dart';
+import '../modules/signin/bindings/signin_binding.dart';
+import '../modules/signin/views/contact_number_signin_view.dart';
+import '../modules/signin/views/email_signin_view.dart';
+import '../modules/signin/views/otp_signin_view.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/views/contact_number_signup_view.dart';
+import '../modules/signup/views/email_signup_view.dart';
+import '../modules/signup/views/otp_signup_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.OTP;
+  static final INITIAL =
+      Get.find<AuthService>().isLoggedIn ? Routes.HOME : Routes.AUTH;
 
   static final routes = [
     GetPage(
@@ -43,51 +56,138 @@ class AppPages {
           binding: AccountBinding(),
         ),
         GetPage(
+          name: _Paths.ADDRESSES,
+          page: () => const AddressesView(),
+          binding: AddressesBinding(),
+          children: [
+            GetPage(
+              name: _Paths.FORM,
+              page: () => const AddressFormView(),
+              binding: AddressesBinding(),
+            ),
+          ],
+        ),
+        GetPage(
+          name: _Paths.SECURITY,
+          page: () => const SecurityView(),
+          binding: ProfileBinding(),
+          children: [
+            GetPage(
+              name: _Paths.CHANGEPASSWORD,
+              page: () => const ChangePasswordView(),
+              binding: ProfileBinding(),
+            ),
+          ],
+        ),
+        GetPage(
           name: _Paths.SETTINGS,
           page: () => const SettingsView(),
           binding: SettingsBinding(),
         ),
+      ],
+    ),
+    GetPage(
+      name: _Paths.AUTH,
+      page: () => const ContactNumberSigninView(),
+      binding: SigninBinding(),
+      transition: Transition.fadeIn,
+      children: [
         GetPage(
-          name: _Paths.ADDRESSES,
-          page: () => const AddressesView(),
-          binding: AddressesBinding(),
+          name: _Paths.SIGNUP,
+          page: () => const ContactNumberSignupView(),
+          binding: SignupBinding(),
+          transition: Transition.fade,
+          transitionDuration: const Duration(milliseconds: 500),
+          curve: Curves.easeIn,
+          children: [
+            GetPage(
+              name: _Paths.CONTACT_NUMBER,
+              page: () => const ContactNumberSignupView(),
+              binding: SignupBinding(),
+              transition: Transition.fade,
+              transitionDuration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+            ),
+            GetPage(
+              name: _Paths.EMAIL,
+              page: () => const EmailSignupView(),
+              binding: SignupBinding(),
+              transition: Transition.fade,
+              transitionDuration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+            ),
+            GetPage(
+              name: _Paths.OTP,
+              page: () => const OtpSignupView(),
+              binding: SignupBinding(),
+              transition: Transition.fade,
+              transitionDuration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+            ),
+          ],
+        ),
+        GetPage(
+          name: _Paths.SIGNIN,
+          page: () => const ContactNumberSigninView(),
+          binding: SigninBinding(),
+          children: [
+            GetPage(
+              name: _Paths.CONTACT_NUMBER,
+              page: () => const ContactNumberSigninView(),
+              binding: SigninBinding(),
+              transition: Transition.fade,
+              transitionDuration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+            ),
+            GetPage(
+              name: _Paths.EMAIL,
+              page: () => const EmailSigninView(),
+              binding: SigninBinding(),
+              transition: Transition.fade,
+              transitionDuration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+            ),
+            GetPage(
+              name: _Paths.OTP,
+              page: () => const OtpSigninView(),
+              binding: SigninBinding(),
+              transition: Transition.fade,
+              transitionDuration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+            ),
+          ],
         ),
       ],
     ),
     GetPage(
-      name: _Paths.LOGIN,
-      page: () => const LoginView(),
-      binding: AuthBinding(),
-      transition: Transition.fadeIn,
-      transitionDuration: const Duration(milliseconds: 50),
+      name: _Paths.RESET_PASSWORD,
+      page: () => const ResetPasswordView(),
+      binding: ResetPasswordBinding(),
+      children: [
+        GetPage(
+          name: _Paths.OTP,
+          page: () => const OtpResetPasswordView(),
+          binding: ResetPasswordBinding(),
+        ),
+        GetPage(
+          name: _Paths.NEW_PASSWORD,
+          page: () => const NewPasswordView(),
+          binding: ResetPasswordBinding(),
+        ),
+        GetPage(
+          name: _Paths.SUCCESS,
+          page: () => const SuccessResetPasswordView(),
+          binding: ResetPasswordBinding(),
+          transition: Transition.cupertino,
+          transitionDuration: const Duration(milliseconds: 500),
+          curve: Curves.easeIn,
+        ),
+      ],
     ),
     GetPage(
-      name: _Paths.REGISTER,
-      page: () => const RegisterView(),
-      binding: AuthBinding(),
-      transition: Transition.fade,
-      transitionDuration: const Duration(milliseconds: 500),
-      curve: Curves.easeIn,
-    ),
-    GetPage(
-      name: _Paths.AUTH,
-      page: () => const AuthView(),
-      binding: AuthBinding(),
-    ),
-    GetPage(
-      name: _Paths.SECURITY,
-      page: () => const SecurityView(),
-      binding: ProfileBinding(),
-    ),
-    GetPage(
-      name: _Paths.CHANGEPASSWORD,
-      page: () => const ChangePasswordView(),
-      binding: ProfileBinding(),
-    ),
-    GetPage(
-      name: _Paths.OTP,
-      page: () => const OtpView(),
-      binding: AuthBinding(),
+      name: _Paths.CART,
+      page: () => const CartView(),
+      binding: CartBinding(),
     ),
   ];
 }

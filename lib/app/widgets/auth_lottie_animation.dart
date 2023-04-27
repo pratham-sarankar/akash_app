@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -14,8 +12,8 @@ class AuthLottieAnimation extends StatelessWidget {
       builder: (controller) {
         return Hero(
           tag: "login_lottie",
-          child: Lottie.network(
-            'https://assets8.lottiefiles.com/packages/lf20_6YCRFI.json',
+          child: Lottie.asset(
+            'assets/lotties/auth_lottie.json',
             controller: controller.authLottieController,
           ),
         );

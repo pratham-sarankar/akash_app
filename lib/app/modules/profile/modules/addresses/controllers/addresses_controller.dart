@@ -1,16 +1,25 @@
+import 'package:akash/app/data/models/address.dart';
+import 'package:akash/app/data/repositories/address_repository.dart';
+import 'package:akash/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class AddressesController extends GetxController {
-  //TODO: Implement AddressesController
+  late RxList<Address> addresses;
 
-  final count = 0.obs;
   @override
   void onInit() {
+    addresses = RxList<Address>([]);
     super.onInit();
+  }
+
+  void initialize() async {
+    List<Address> result = await Get.find<AddressRepository>().getAddresses();
+    addresses.value = result;
   }
 
   @override
   void onReady() {
+    initialize();
     super.onReady();
   }
 
@@ -19,5 +28,16 @@ class AddressesController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void add() async {
+    await Get.toNamed(Routes.ADDRESS_FORM);
+    initialize();
+  }
+
+  void edit(Address address) async {
+    await Get.toNamed(
+      Routes.ADDRESS_FORM,
+      arguments: address,
+    );
+    initialize();
+  }
 }
