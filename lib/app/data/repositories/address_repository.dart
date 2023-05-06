@@ -39,7 +39,7 @@ class AddressRepository extends Repository<Address> {
     return converter(addressData);
   }
 
-  Future<bool> removeAddress(String id) async {
+  Future<bool> removeAddress(int id) async {
     Response response = await delete("/$id");
     return true;
   }

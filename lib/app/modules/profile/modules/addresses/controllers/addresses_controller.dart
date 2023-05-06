@@ -3,7 +3,7 @@ import 'package:akash/app/data/repositories/address_repository.dart';
 import 'package:akash/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
-class AddressesController extends GetxController {
+class AddressesController extends GetxController with StateMixin<List<Address>> {
   late RxList<Address> addresses;
 
   @override
@@ -38,6 +38,11 @@ class AddressesController extends GetxController {
       Routes.ADDRESS_FORM,
       arguments: address,
     );
+    initialize();
+  }
+
+  void delete(Address address)async {
+    await Get.find<AddressRepository>().removeAddress(address.id!);
     initialize();
   }
 }

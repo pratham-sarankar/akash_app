@@ -25,6 +25,7 @@ class AuthService extends GetxService {
     currentUser.value = user;
   }
 
+
   String? get accessToken => _box.read('accessToken');
 
   String? get refreshToken => _box.read('refreshToken');

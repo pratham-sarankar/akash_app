@@ -43,6 +43,10 @@ class AddressesView extends GetView<AddressesController> {
                       onTap: () {
                         controller.edit(address);
                       },
+                      onDelete: () {
+                        Get.back();
+                        controller.delete(address);
+                      },
                     ),
                   ),
               ],

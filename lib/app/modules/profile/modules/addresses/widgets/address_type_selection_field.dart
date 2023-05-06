@@ -1,6 +1,7 @@
 import 'package:akash/app/data/enums/address_type.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 class AddressTypeSelectionField extends StatelessWidget {
@@ -36,7 +37,6 @@ class AddressTypeSelectionField extends StatelessWidget {
                 children: [
                   Icon(
                     AddressTypeExtension.getIconData(type),
-                    color: Colors.black,
                   ),
                   const SizedBox(width: 10),
                   Text(
@@ -51,13 +51,15 @@ class AddressTypeSelectionField extends StatelessWidget {
         buttonStyleData: ButtonStyleData(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: context.theme.inputDecorationTheme.border!.borderSide.color,
+            ),
           ),
           height: 55,
         ),
         dropdownStyleData: DropdownStyleData(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
           ),
         ),
         iconStyleData: const IconStyleData(
@@ -65,14 +67,12 @@ class AddressTypeSelectionField extends StatelessWidget {
             padding: EdgeInsets.only(right: 8),
             child: Icon(
               IconlyLight.arrow_down_2,
-              color: Colors.black,
             ),
           ),
           openMenuIcon: Padding(
             padding: EdgeInsets.only(right: 8),
             child: Icon(
               IconlyLight.arrow_up_2,
-              color: Colors.black,
             ),
           ),
           iconSize: 20,

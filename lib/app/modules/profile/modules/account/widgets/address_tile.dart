@@ -2,15 +2,18 @@ import 'package:akash/app/data/enums/address_type.dart';
 import 'package:akash/app/data/models/address.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 
 class AddressTile extends StatelessWidget {
   const AddressTile({
     Key? key,
     required this.onTap,
     required this.address,
+    required this.onDelete,
   }) : super(key: key);
   final Address address;
   final void Function()? onTap;
+  final void Function()? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +28,11 @@ class AddressTile extends StatelessWidget {
             width: 2,
           ),
         ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 15,
+        padding: const EdgeInsets.only(
+          right: 5,
+          top: 5,
+          left: 15,
+          bottom: 15,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,6 +68,38 @@ class AddressTile extends StatelessWidget {
                       ),
                     ),
                   ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () {
+                    Get.dialog(
+                      AlertDialog(
+                        title: const Text("Alert"),
+                        content: const Text("Are you sure you want to delete this address?"),
+                        titlePadding: const EdgeInsets.only(right: 18, left: 18, top: 20),
+                        contentPadding: const EdgeInsets.only(right: 18, left: 18, top: 10),
+                        actionsPadding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: Get.context!.theme.scaffoldBackgroundColor,
+                        surfaceTintColor: Get.context!.theme.scaffoldBackgroundColor,
+                        actions: [
+                          TextButton(
+                            onPressed: () async {
+                              onDelete?.call();
+                            },
+                            child: const Text("Yes"),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    IconlyLight.delete,
+                    color: context.theme.colorScheme.error,
+                  ),
+                ),
               ],
             ),
             if (address.name != null && address.name!.isNotEmpty)

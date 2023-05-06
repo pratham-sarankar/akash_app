@@ -1,4 +1,6 @@
 import 'package:akash/app/data/models/user.dart';
+import 'package:akash/app/data/repositories/cart_repository.dart';
+import 'package:akash/app/data/repositories/wishlist_repository.dart';
 import 'package:akash/app/data/services/auth_service.dart';
 import 'package:akash/app/interfaces/repository.dart';
 import 'package:get/get.dart';
@@ -25,9 +27,15 @@ class AuthRepository extends Repository<User> {
     var accessToken = data["accessToken"];
     var refreshToken = data["refreshToken"];
 
-    await Get.find<AuthService>().saveAccessToken(accessToken);
-    await Get.find<AuthService>().saveRefreshToken(refreshToken);
-    await Get.find<AuthService>().reloadUser();
+    final authService = Get.find<AuthService>();
+    await authService.saveAccessToken(accessToken);
+    await authService.saveRefreshToken(refreshToken);
+    await authService.reloadUser();
+
+    //After login, initialize the repositories
+    Get.find<WishlistRepository>().onInit();
+    Get.find<CartRepository>().onInit();
+
     return true;
   }
 

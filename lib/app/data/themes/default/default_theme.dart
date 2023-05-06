@@ -49,7 +49,7 @@ class DefaultTheme {
         ),
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
-            borderSide: const BorderSide(width: 0.5),
+            borderSide: const BorderSide(width: 0.5,color: Colors.white),
             gapPadding: 5,
             borderRadius: BorderRadius.circular(8),
           ),
