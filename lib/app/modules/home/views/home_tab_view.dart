@@ -1,9 +1,9 @@
 import 'package:akash/app/data/models/category.dart';
-import 'package:akash/app/data/models/product.dart';
 import 'package:akash/app/modules/home/controllers/home_tab_controller.dart';
 import 'package:akash/app/modules/home/widgets/akash_search_field.dart';
 import 'package:akash/app/modules/home/widgets/category_grid_display.dart';
 import 'package:akash/app/modules/home/widgets/product_list_display.dart';
+import 'package:akash/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,14 @@ class HomeTabView extends GetView<HomeTabController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const AkashSearchField(),
+        title: Hero(
+          tag: "search_field",
+          child: AkashSearchField(
+            onTap: () {
+              Get.toNamed(Routes.SEARCH);
+            },
+          ),
+        ),
       ),
       // appBar: AppBar(
       //   title: const AkashSearchField(),
@@ -179,6 +186,7 @@ class HomeTabView extends GetView<HomeTabController> {
           children: [
             CategoryGridDisplay(
               title: "Shop By Category",
+              crossAxisCount: 4,
               categories: getCategories(),
             ),
             // const OfferWidget(),
@@ -193,34 +201,15 @@ class HomeTabView extends GetView<HomeTabController> {
             //   animate: false,
             //   duration: const Duration(seconds: 2),
             // ),
-            ProductListDisplay(
-              title: 'Order Again',
-              products: [
-                Product(
-                  name: "Kurkure Namkeen Masala Munch",
-                  photoList: [
-                    "https://www.bigbasket.com/media/uploads/p/l/102761_17-kurkure-namkeen-masala-munch.jpg"
-                  ],
-                  salePrice: 30,
-                  discountPrice: 28,
-                ),
-                Product(
-                  name: "Maggi 2-Minute Instant Noodles",
-                  photoList: [
-                    "https://m.media-amazon.com/images/I/71jfrTizZTL._SX679_.jpg"
-                  ],
-                  salePrice: 20,
-                  discountPrice: 17,
-                ),
-                Product(
-                  name: "Britannia Good Day Butter Biscuit",
-                  photoList: [
-                    "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=480,h=480/app/images/products/sliding_image/86864a.jpg?ts=1658907723"
-                  ],
-                  salePrice: 10,
-                ),
-              ],
-            ),
+            Obx(() {
+              if (controller.topProducts.isEmpty) {
+                return Container();
+              }
+              return ProductListDisplay(
+                title: 'Top Products',
+                products: controller.topProducts,
+              );
+            }),
             // const GridDisplay(
             //   crossAxisCount: 3,
             //   title: 'Grid Display',
@@ -291,7 +280,7 @@ class HomeTabView extends GetView<HomeTabController> {
         photoUrl: 'https://cdn-icons-png.flaticon.com/512/2827/2827770.png',
       ),
       Category(
-        name: 'Personal Care',
+        name: 'Care',
         photoUrl: 'https://cdn-icons-png.flaticon.com/512/3901/3901586.png',
       ),
       Category(

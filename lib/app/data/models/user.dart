@@ -1,3 +1,4 @@
+import 'package:akash/app/data/values/constants.dart';
 import 'package:akash/app/interfaces/model.dart';
 import 'package:intl/intl.dart';
 
@@ -39,7 +40,7 @@ class User extends Model {
     if (photoUrl == null) {
       return;
     }
-    _photoUrl = "$photoUrl?t=${DateTime.now().millisecondsSinceEpoch}";
+    _photoUrl = "$host/users/profile/me/photo/$photoUrl?t=${DateTime.now().millisecondsSinceEpoch}";
   }
 
   @override

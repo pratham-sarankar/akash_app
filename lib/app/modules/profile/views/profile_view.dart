@@ -79,7 +79,9 @@ class ProfileView extends GetView<ProfileController> {
             title: const Text("Wishlist"),
             subtitle: const Text("Your favourite products"),
             trailing: const Icon(IconlyLight.arrow_right_2),
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Routes.WISHLIST);
+            },
           ),
           ListTile(
             leading: const SizedBox(

@@ -1,6 +1,9 @@
 import 'package:akash/app/data/repositories/address_repository.dart';
 import 'package:akash/app/data/repositories/auth_repository.dart';
+import 'package:akash/app/data/repositories/cart_repository.dart';
+import 'package:akash/app/data/repositories/product_repository.dart';
 import 'package:akash/app/data/repositories/profile_repository.dart';
+import 'package:akash/app/data/repositories/wishlist_repository.dart';
 import 'package:akash/app/data/services/auth_service.dart';
 import 'package:akash/app/data/services/toast_service.dart';
 import 'package:akash/app/data/services/validation_service.dart';
@@ -23,9 +26,20 @@ void main() async {
   Get.create<AuthRepository>(() => AuthRepository());
   Get.create<ProfileRepository>(() => ProfileRepository());
   Get.create<AddressRepository>(() => AddressRepository());
+  Get.create<ProductRepository>(() => ProductRepository());
 
-  //Initialization
+  // Initialize AuthService before putting/initializing any permanent repository.
   await Get.find<AuthService>().init();
+
+  // Note:
+  // 1. Cart Repository must be put after AuthService is initialized, because Cart Repository uses AuthService to get access token.
+  // 2. Cart Repository Cart has RxList of live cart products. Hence, it should be permanent.
+  Get.put<CartRepository>(CartRepository(), permanent: true);
+
+  // Note:
+  // 1. Wishlist Repository must be put after AuthService is initialized, because Wishlist Repository uses AuthService to get access token.
+  // 2. Wishlist Repository Wishlist has RxList of live wishlist products. Hence, it should be permanent.
+  Get.put<WishlistRepository>(WishlistRepository(), permanent: true);
 
   runApp(
     GetMaterialApp(

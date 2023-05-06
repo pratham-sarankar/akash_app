@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 class DefaultTheme {
   static ThemeData get dark => ThemeData.dark(useMaterial3: true).copyWith(
         colorScheme: const ColorScheme(
-          primary: Color(0xFFFFA500),
+          primary: Color(0xFFFF8C00),
           // Primary brand color (orange)
-          primaryContainer: Color(0xFFFF8C00),
+          primaryContainer: Color(0xFFFFA500),
           // A shade darker than primary
           secondary: Color(0xFF81C784),
           // A green color for secondary actions
@@ -101,6 +101,17 @@ class DefaultTheme {
           unselectedItemColor: const Color(0xffbebebe),
           unselectedLabelStyle: GoogleFonts.poppins(),
         ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.orange.shade800,
+            foregroundColor: Colors.white,
+            surfaceTintColor: Colors.orange.shade200,
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
       );
 
   static ThemeData get light => ThemeData.light(useMaterial3: true).copyWith(
@@ -132,6 +143,7 @@ class DefaultTheme {
           brightness: Brightness.light,
           // Sets the brightness to light
           onInverseSurface: Colors.grey.shade100,
+          shadow: Colors.grey.shade100,
         ),
         scaffoldBackgroundColor: Colors.white,
         // Color for the app scaffold

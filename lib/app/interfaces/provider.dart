@@ -114,7 +114,8 @@ abstract class Provider<T> extends GetConnect {
 
   Future _verifyStatus(Response response, List<int> allowedStatuses) async {
     print("${response.statusCode} - ${response.body}");
-    if (response.statusCode == HttpStatus.unauthorized) {
+    var code = response.body?['data']?['code'];
+    if (code=="invalid_token"||code=="expired_token") {
       await Get.find<AuthService>().logout();
       return;
     }

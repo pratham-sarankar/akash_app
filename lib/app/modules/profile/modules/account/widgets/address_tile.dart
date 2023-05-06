@@ -18,10 +18,10 @@ class AddressTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.theme.colorScheme.onInverseSurface,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: Colors.grey.shade300,
+            color: context.theme.colorScheme.onBackground.withOpacity(0.5),
             width: 2,
           ),
         ),

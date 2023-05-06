@@ -31,8 +31,8 @@ class ProfileController extends GetxController {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
+        backgroundColor: Get.context!.theme.scaffoldBackgroundColor,
+        surfaceTintColor: Get.context!.theme.scaffoldBackgroundColor,
         actions: [
           TextButton(
             onPressed: () async {

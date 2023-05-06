@@ -1,41 +1,64 @@
-import 'package:akash/app/data/enums/tax_type.dart';
+import 'package:akash/app/interfaces/model.dart';
 
-class Product {
-  final String? id;
-  String? name;
-  double? salePrice;
-  double? discountPrice;
-  List<String>? photoList;
-  double? shippingCost;
-  double? tax;
-  TaxType? taxType;
-
-  // final double tax;
-  final String? tag;
-
-  //Additional Details
-  final String? description;
-  final double? rating;
-  int? quantity;
-  int? categoryId;
-  int? subCategoryId;
-  int? availQuantity;
+class Product extends Model {
+  String? code;
+  String? catcode;
+  int? stock;
+  String? remark;
+  String? company;
+  num? mrp;
+  num? saleRate;
+  num? purchaseRate;
+  num? deal;
+  num? free;
 
   Product({
-    this.id,
-    this.photoList,
-    this.name,
-    this.salePrice,
-    this.discountPrice,
-    this.tag,
-    this.description = '',
-    this.rating = 0,
-    this.categoryId = 0,
-    this.subCategoryId = 0,
-    this.quantity = 1,
-    this.tax,
-    this.taxType,
-    this.availQuantity,
-    this.shippingCost,
+    super.id,
+    super.name,
+    this.code,
+    this.catcode,
+    this.stock,
+    this.remark,
+    this.company,
+    this.mrp,
+    this.saleRate,
+    this.purchaseRate,
+    this.deal,
+    this.free,
   });
+
+  factory Product.fromMap(Map<String, dynamic> map) {
+    return Product(
+      id: map['id'],
+      name: map['name'],
+      code: map['code'],
+      catcode: map['catcode'],
+      stock: map['stock'],
+      remark: map['remark'],
+      company: map['company'],
+      mrp: map['mrp'],
+      saleRate: map['saleRate'],
+      purchaseRate: map['purchaseRate'],
+      deal: map['deal'],
+      free: map['free'],
+    );
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "catcode": catcode,
+      "code": code,
+      "name": name,
+      "stock": stock,
+      "remark": remark,
+      "company": company,
+      "mrp": mrp,
+      "saleRate": saleRate,
+      "deal": deal,
+      "free": free,
+      "purchaseRate": purchaseRate
+    };
+  }
 }

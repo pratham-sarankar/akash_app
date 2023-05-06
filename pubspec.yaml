@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   flutter_otp_text_field: ^1.1.1
   faker:
+  flutter_svg: ^2.0.5
 
 dev_dependencies:
   flutter_lints: ^2.0.0

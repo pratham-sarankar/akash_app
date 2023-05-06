@@ -22,6 +22,8 @@ import '../modules/reset_password/views/new_password_view.dart';
 import '../modules/reset_password/views/otp_reset_password_view.dart';
 import '../modules/reset_password/views/reset_password_view.dart';
 import '../modules/reset_password/views/success_reset_password_view.dart';
+import '../modules/search/bindings/search_binding.dart';
+import '../modules/search/views/search_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/contact_number_signin_view.dart';
 import '../modules/signin/views/email_signin_view.dart';
@@ -30,6 +32,8 @@ import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/contact_number_signup_view.dart';
 import '../modules/signup/views/email_signup_view.dart';
 import '../modules/signup/views/otp_signup_view.dart';
+import '../modules/wishlist/bindings/wishlist_binding.dart';
+import '../modules/wishlist/views/wishlist_view.dart';
 
 part 'app_routes.dart';
 
@@ -44,6 +48,7 @@ class AppPages {
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.PROFILE,
@@ -188,6 +193,18 @@ class AppPages {
       name: _Paths.CART,
       page: () => const CartView(),
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH,
+      page: () => const SearchView(),
+      binding: SearchBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.WISHLIST,
+      page: () => const WishlistView(),
+      binding: WishlistBinding(),
+      transition: Transition.fade,
     ),
   ];
 }
