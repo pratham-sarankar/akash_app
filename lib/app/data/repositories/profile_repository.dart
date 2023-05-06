@@ -35,6 +35,22 @@ class ProfileRepository extends Repository<User> {
     return true;
   }
 
+  Future<bool> resetPassword({
+    required String accessToken,
+    required String password,
+  }) async {
+    Response response = await put(
+      "/reset/password",
+      {
+        "password": password,
+      },
+      headers: {
+        "Authorization": "Bearer $accessToken",
+      },
+    );
+    return true;
+  }
+
   Future<bool> updateProfile({
     String? username,
     String? displayName,

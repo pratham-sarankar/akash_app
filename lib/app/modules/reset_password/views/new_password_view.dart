@@ -104,6 +104,12 @@ class NewPasswordView extends GetView<NewPasswordController> {
                                 }
                                 return null;
                               },
+                              onSaved: (newValue) {
+                                controller.confirmPassword = newValue;
+                              },
+                              onChanged: (value) {
+                                controller.confirmPassword = value;
+                              },
                               obscureText:
                                   controller.isConfirmPasswordHidden.value,
                               decoration: InputDecoration(

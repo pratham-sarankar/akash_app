@@ -31,6 +31,10 @@ void main() async {
   // Initialize AuthService before putting/initializing any permanent repository.
   await Get.find<AuthService>().init();
 
+  //Note: The permanent repositories above must be initialized on logging in also.
+  //As these repositories are permanent, they will be initialized only once.
+  //And on login it must be reinitialized so that the user specific data can be fetched.
+
   // Note:
   // 1. Cart Repository must be put after AuthService is initialized, because Cart Repository uses AuthService to get access token.
   // 2. Cart Repository Cart has RxList of live cart products. Hence, it should be permanent.
