@@ -30,9 +30,38 @@ class ProductCard extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Image.asset(
-                "assets/default_product.png",
-              ),
+              child: product.hasStock
+                  ? Image.asset(
+                      "assets/default_product.png",
+                    )
+                  : Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          color: context.theme.colorScheme.onBackground
+                              .withOpacity(0.1),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                "Out of Stock",
+                                style: context.textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Opacity(
+                          opacity: 0.3,
+                          child: Image.asset(
+                            "assets/default_product.png",
+                          ),
+                        ),
+                      ],
+                    ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -119,55 +148,19 @@ class ProductCard extends StatelessWidget {
                           ),
                         ),
                       const Spacer(),
-                      Obx(() {
-                        if (cartProductController.cartQuantity > 0) {
-                          return Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  final newQuantity =
-                                      cartProductController.cartQuantity.value -
-                                          1;
-                                  cartProductController
-                                      .onUpdateQuantity(newQuantity);
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: context.theme.colorScheme.primary,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  child: const Text("-"),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 4,
-                                ),
-                                child: Text(
-                                  (cartProductController.cartQuantity.value)
-                                      .toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  if (!cartProductController.canAdd) return;
-                                  final newQuantity =
-                                      cartProductController.cartQuantity.value +
-                                          1;
-                                  cartProductController
-                                      .onUpdateQuantity(newQuantity);
-                                },
-                                child: Opacity(
-                                  opacity:
-                                      cartProductController.canAdd ? 1 : 0.5,
+                      if (product.hasStock)
+                        Obx(() {
+                          if (cartProductController.cartQuantity > 0) {
+                            return Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    final newQuantity = cartProductController
+                                            .cartQuantity.value -
+                                        1;
+                                    cartProductController
+                                        .onUpdateQuantity(newQuantity);
+                                  },
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: context.theme.colorScheme.primary,
@@ -177,29 +170,67 @@ class ProductCard extends StatelessWidget {
                                       horizontal: 8,
                                       vertical: 4,
                                     ),
-                                    child: const Text("+"),
+                                    child: const Text("-"),
                                   ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 4,
+                                  ),
+                                  child: Text(
+                                    (cartProductController.cartQuantity.value)
+                                        .toString(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    if (!cartProductController.canAdd) return;
+                                    final newQuantity = cartProductController
+                                            .cartQuantity.value +
+                                        1;
+                                    cartProductController
+                                        .onUpdateQuantity(newQuantity);
+                                  },
+                                  child: Opacity(
+                                    opacity:
+                                        cartProductController.canAdd ? 1 : 0.5,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color:
+                                            context.theme.colorScheme.primary,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 4,
+                                      ),
+                                      child: const Text("+"),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return GestureDetector(
+                              onTap: cartProductController.onAddToCart,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: context.theme.colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 4,
+                                ),
+                                child: const Text("Add"),
                               ),
-                            ],
-                          );
-                        } else {
-                          return GestureDetector(
-                            onTap: cartProductController.onAddToCart,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: context.theme.colorScheme.primary,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 15,
-                                vertical: 4,
-                              ),
-                              child: const Text("Add"),
-                            ),
-                          );
-                        }
-                      }),
+                            );
+                          }
+                        }),
                       const SizedBox(width: 12),
                     ],
                   ),

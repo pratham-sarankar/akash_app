@@ -70,4 +70,6 @@ class Product extends Model {
       'maxCartLimit': maxCartLimit,
     };
   }
+
+  bool get hasStock => stock != null && stock! > 0;
 }

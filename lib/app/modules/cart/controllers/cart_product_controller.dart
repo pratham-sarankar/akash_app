@@ -13,6 +13,8 @@ class CartProductController extends GetxController {
       cartQuantity.value < product.maxCartLimit &&
       cartQuantity.value < product.stock!;
 
+  bool get canSubtract => cartQuantity.value > product.minCartLimit;
+
   @override
   void onInit() {
     _initializeCartQuantity();
@@ -46,16 +48,23 @@ class CartProductController extends GetxController {
 
   onUpdateQuantity(int newQuantity) async {
     final repository = Get.find<CartRepository>();
-    if (newQuantity == 0) {
+    if (newQuantity == 0 || newQuantity < product.minCartLimit) {
       await repository.removeProduct(product.id!);
       return;
     }
     await repository.updateProduct(product.id!, newQuantity);
-    if(newQuantity==product.maxCartLimit){
+    if(newQuantity==product.minCartLimit){
+      Get.find<ToastService>().showAlertMessage("Min limit reached");
+    }
+    if (newQuantity == product.maxCartLimit) {
       Get.find<ToastService>().showAlertMessage("Max limit reached");
     }
-    if(newQuantity==product.stock){
+    if (newQuantity == product.stock) {
       Get.find<ToastService>().showAlertMessage("Stock limit reached");
     }
+  }
+
+  onRemove() async {
+    await Get.find<CartRepository>().removeProduct(product.id!);
   }
 }
