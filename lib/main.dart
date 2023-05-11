@@ -10,12 +10,14 @@ import 'package:akash/app/data/services/validation_service.dart';
 import 'package:akash/app/data/themes/default/default_theme.dart';
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
 
   //Services
   Get.put<ToastService>(ToastService(), permanent: true);

@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:akash/app/data/repositories/auth_repository.dart';
 import 'package:akash/app/data/services/auth_service.dart';
+import 'package:akash/app/data/services/toast_service.dart';
 import 'package:akash/app/interfaces/custom_exception/api_exception.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -14,7 +16,7 @@ abstract class Provider<T> extends GetConnect {
 
   @override
   void onInit() {
-    var host = const String.fromEnvironment("host");
+    var host = dotenv.env['HOST'];
     httpClient.baseUrl = "$host$path";
     httpClient.maxAuthRetries = 1;
     httpClient.addRequestModifier<Object?>((request) async {
@@ -120,9 +122,11 @@ abstract class Provider<T> extends GetConnect {
       return;
     }
     if (!allowedStatuses.contains(response.statusCode)) {
+      final message = (response.body as Map)["message"];
+      Get.find<ToastService>().showErrorMessage(message);
       throw ApiException(
         status: response.statusCode ?? HttpStatus.internalServerError,
-        message: (response.body as Map)["message"],
+        message: message,
       );
     }
   }

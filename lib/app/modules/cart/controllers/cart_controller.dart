@@ -33,6 +33,9 @@ class CartController extends GetxController with StateMixin<List<CartProduct>> {
     summary.value = cartSummary;
   }
 
+  void checkout() async {
+  }
+
   void _addListener() {
     final controller = Get.find<CartRepository>();
     try {

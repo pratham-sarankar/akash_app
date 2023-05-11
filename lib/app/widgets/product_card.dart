@@ -158,24 +158,29 @@ class ProductCard extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
+                                  if (!cartProductController.canAdd) return;
                                   final newQuantity =
                                       cartProductController.cartQuantity.value +
                                           1;
                                   cartProductController
                                       .onUpdateQuantity(newQuantity);
                                 },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: context.theme.colorScheme.primary,
-                                    borderRadius: BorderRadius.circular(5),
+                                child: Opacity(
+                                  opacity:
+                                      cartProductController.canAdd ? 1 : 0.5,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: context.theme.colorScheme.primary,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    child: const Text("+"),
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  child: const Text("+"),
                                 ),
-                              )
+                              ),
                             ],
                           );
                         } else {

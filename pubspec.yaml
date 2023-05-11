@@ -22,6 +22,8 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   faker:
   flutter_svg: ^2.0.5
+  paytm_allinonesdk: ^1.2.1
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -33,4 +35,5 @@ flutter:
   assets:
     - assets/
     - assets/lotties/
+    - .env
 

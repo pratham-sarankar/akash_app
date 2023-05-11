@@ -12,6 +12,9 @@ class Product extends Model {
   num? deal;
   num? free;
 
+  num minCartLimit;
+  num maxCartLimit;
+
   Product({
     super.id,
     super.name,
@@ -25,6 +28,8 @@ class Product extends Model {
     this.purchaseRate,
     this.deal,
     this.free,
+    this.maxCartLimit=double.infinity,
+    this.minCartLimit=1,
   });
 
   factory Product.fromMap(Map<String, dynamic> map) {
@@ -41,6 +46,8 @@ class Product extends Model {
       purchaseRate: map['purchaseRate'],
       deal: map['deal'],
       free: map['free'],
+      maxCartLimit: map['maxCartLimit'],
+      minCartLimit: map['minCartLimit'],
     );
   }
 
@@ -58,7 +65,9 @@ class Product extends Model {
       "saleRate": saleRate,
       "deal": deal,
       "free": free,
-      "purchaseRate": purchaseRate
+      "purchaseRate": purchaseRate,
+      'minCartLimit': minCartLimit,
+      'maxCartLimit': maxCartLimit,
     };
   }
 }

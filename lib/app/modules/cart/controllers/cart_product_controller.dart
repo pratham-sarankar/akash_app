@@ -1,5 +1,6 @@
 import 'package:akash/app/data/models/product.dart';
 import 'package:akash/app/data/repositories/cart_repository.dart';
+import 'package:akash/app/data/services/toast_service.dart';
 import 'package:get/get.dart';
 
 class CartProductController extends GetxController {
@@ -7,6 +8,10 @@ class CartProductController extends GetxController {
   CartProductController({required this.product});
 
   late RxInt cartQuantity;
+
+  bool get canAdd =>
+      cartQuantity.value < product.maxCartLimit &&
+      cartQuantity.value < product.stock!;
 
   @override
   void onInit() {
@@ -39,13 +44,18 @@ class CartProductController extends GetxController {
     await Get.find<CartRepository>().addProduct(product.id!);
   }
 
-
   onUpdateQuantity(int newQuantity) async {
     final repository = Get.find<CartRepository>();
-    if(newQuantity==0){
+    if (newQuantity == 0) {
       await repository.removeProduct(product.id!);
       return;
     }
     await repository.updateProduct(product.id!, newQuantity);
+    if(newQuantity==product.maxCartLimit){
+      Get.find<ToastService>().showAlertMessage("Max limit reached");
+    }
+    if(newQuantity==product.stock){
+      Get.find<ToastService>().showAlertMessage("Stock limit reached");
+    }
   }
 }
