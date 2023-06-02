@@ -1,3 +1,4 @@
+import 'package:akash/app/data/models/address.dart';
 import 'package:akash/app/data/models/cart_product.dart';
 import 'package:akash/app/data/models/cart_summary.dart';
 import 'package:akash/app/data/models/product.dart';
@@ -59,10 +60,14 @@ class CartRepository extends Repository<CartProduct> {
     return CartProduct.fromMap(map);
   }
 
+  void clear() {
+    cartProducts.clear();
+  }
+
   Future<List<CartProduct>> fetchAll() async {
     final response = await get("/");
     final cartProducts = response.body?['data']?['cartProducts'];
-    if(cartProducts==null){
+    if (cartProducts == null) {
       return [];
     }
     return cartProducts
@@ -94,9 +99,24 @@ class CartRepository extends Repository<CartProduct> {
     _updateProducts();
   }
 
-  Future<CartSummary> getSummary()async{
+  Future<CartSummary> getSummary() async {
     Response response = await get("/summary");
     final body = response.body?['data'];
     return CartSummary.fromMap(body);
+  }
+
+  Future<Map<String, dynamic>> checkout(Address address) async {
+    Response response = await post("/checkout", {"addressId": address.id});
+    return response.body['data'];
+  }
+
+  Future<bool> verifyPayment(String orderId, String paymentId) async {
+    try {
+      var response = await post(
+          '/razorpay/verify', {"orderId": orderId, "paymentId": paymentId});
+      return response.statusCode == 200;
+    } catch (e) {
+      return false;
+    }
   }
 }

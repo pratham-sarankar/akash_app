@@ -10,10 +10,12 @@ class AddressTile extends StatelessWidget {
     required this.onTap,
     required this.address,
     required this.onDelete,
+    this.isSelected = false,
   }) : super(key: key);
   final Address address;
   final void Function()? onTap;
   final void Function()? onDelete;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,10 @@ class AddressTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: context.theme.colorScheme.onInverseSurface,
+          color: context.theme.colorScheme.onInverseSurface.withOpacity(isSelected?0.1:0.05),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: context.theme.colorScheme.onBackground.withOpacity(0.5),
+            color: context.theme.colorScheme.onBackground.withOpacity(isSelected?0.5:0.2),
             width: 2,
           ),
         ),
@@ -74,16 +76,21 @@ class AddressTile extends StatelessWidget {
                     Get.dialog(
                       AlertDialog(
                         title: const Text("Alert"),
-                        content: const Text("Are you sure you want to delete this address?"),
-                        titlePadding: const EdgeInsets.only(right: 18, left: 18, top: 20),
-                        contentPadding: const EdgeInsets.only(right: 18, left: 18, top: 10),
-                        actionsPadding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                        content: const Text(
+                            "Are you sure you want to delete this address?"),
+                        titlePadding:
+                            const EdgeInsets.only(right: 18, left: 18, top: 20),
+                        contentPadding:
+                            const EdgeInsets.only(right: 18, left: 18, top: 10),
+                        actionsPadding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        backgroundColor: Get.context!.theme.scaffoldBackgroundColor,
-                        surfaceTintColor: Get.context!.theme.scaffoldBackgroundColor,
+                        backgroundColor:
+                            Get.context!.theme.scaffoldBackgroundColor,
+                        surfaceTintColor:
+                            Get.context!.theme.scaffoldBackgroundColor,
                         actions: [
                           TextButton(
                             onPressed: () async {

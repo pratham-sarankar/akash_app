@@ -1,3 +1,4 @@
+import 'package:akash/app/data/models/image.dart';
 import 'package:akash/app/data/models/product.dart';
 import 'package:akash/app/modules/cart/controllers/cart_product_controller.dart';
 import 'package:akash/app/modules/wishlist/controllers/wishlist_product_controller.dart';
@@ -8,6 +9,7 @@ import 'package:iconly/iconly.dart';
 class ProductCard extends StatelessWidget {
   const ProductCard({Key? key, required this.product}) : super(key: key);
   final Product product;
+
   @override
   Widget build(BuildContext context) {
     final cartProductController = Get.put<CartProductController>(
@@ -31,9 +33,7 @@ class ProductCard extends StatelessWidget {
           children: [
             Expanded(
               child: product.hasStock
-                  ? Image.asset(
-                      "assets/default_product.png",
-                    )
+                  ? imagesWidget()
                   : Stack(
                       alignment: Alignment.center,
                       children: [
@@ -240,6 +240,23 @@ class ProductCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget imagesWidget() {
+    if (product.images.isEmpty) {
+      return Image.asset(
+        "assets/default_product.png",
+      );
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: 15, bottom: 15, right: 5, left: 5),
+      child: Image.network(
+        ProductImage.url,
+        headers: {
+          "key": product.images.first.imageKey,
+        },
       ),
     );
   }

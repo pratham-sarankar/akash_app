@@ -6,7 +6,7 @@ import 'package:iconly/iconly.dart';
 
 import '../controllers/search_controller.dart';
 
-class SearchView extends GetView<SearchController> {
+class SearchView extends GetView<SearchViewController> {
   const SearchView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {

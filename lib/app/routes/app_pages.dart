@@ -1,11 +1,17 @@
 import 'package:flutter/animation.dart';
+
 import 'package:get/get.dart';
 
 import '../data/services/auth_service.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
+import '../modules/checkout/bindings/checkout_binding.dart';
+import '../modules/checkout/views/address_view.dart';
+import '../modules/checkout/views/checkout_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/orders/bindings/orders_binding.dart';
+import '../modules/orders/views/orders_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/modules/account/bindings/account_binding.dart';
 import '../modules/profile/modules/account/views/account_view.dart';
@@ -205,6 +211,22 @@ class AppPages {
       page: () => const WishlistView(),
       binding: WishlistBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+        name: _Paths.CHECKOUT,
+        page: () => const CheckoutView(),
+        binding: CheckoutBinding(),
+        children: [
+          GetPage(
+            name: _Paths.ADDRESSES,
+            page: () => const AddressView(),
+            binding: CheckoutBinding(),
+          ),
+        ]),
+    GetPage(
+      name: _Paths.ORDERS,
+      page: () => const OrdersView(),
+      binding: OrdersBinding(),
     ),
   ];
 }

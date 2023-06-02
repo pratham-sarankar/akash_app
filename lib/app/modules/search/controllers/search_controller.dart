@@ -3,7 +3,7 @@ import 'package:akash/app/data/repositories/product_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class SearchController extends GetxController with StateMixin<List<Product>> {
+class SearchViewController extends GetxController with StateMixin<List<Product>> {
   late final TextEditingController controller;
 
   @override

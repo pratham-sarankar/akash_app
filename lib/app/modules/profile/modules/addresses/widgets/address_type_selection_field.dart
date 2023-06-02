@@ -52,7 +52,7 @@ class AddressTypeSelectionField extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: context.theme.inputDecorationTheme.border!.borderSide.color,
+              color: context.theme.inputDecorationTheme.border?.borderSide.color??Colors.grey,
             ),
           ),
           height: 55,

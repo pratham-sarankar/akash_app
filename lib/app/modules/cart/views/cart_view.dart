@@ -1,5 +1,6 @@
 import 'package:akash/app/modules/cart/widgets/cart_tile.dart';
 import 'package:akash/app/routes/app_pages.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,7 @@ class CartView extends GetView<CartController> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Lottie.asset(
                     "assets/lotties/empty_illustration_lottie.json",
-                    height: Get.height*0.25,
+                    height: Get.height * 0.25,
                   ),
                 ),
               ),
@@ -46,7 +47,6 @@ class CartView extends GetView<CartController> {
                       text:
                           "Your bag is empty. Add your \nfavourite products to the bag",
                       style: context.textTheme.titleMedium,
-
                       children: [
                         TextSpan(
                           text: " click here",
@@ -98,8 +98,16 @@ class CartView extends GetView<CartController> {
               ),
               const Spacer(),
               TextButton(
-                onPressed: () {},
-                child: const Text("Checkout"),
+                onPressed: () {
+                  controller.checkout();
+                },
+                child: Obx(() {
+                  if (controller.isCheckingOut.value) {
+                    return const CupertinoActivityIndicator(
+                        color: Colors.white);
+                  }
+                  return const Text("Checkout");
+                }),
               ),
             ],
           ),

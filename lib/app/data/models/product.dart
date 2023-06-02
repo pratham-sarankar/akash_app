@@ -1,3 +1,4 @@
+import 'package:akash/app/data/models/image.dart';
 import 'package:akash/app/interfaces/model.dart';
 
 class Product extends Model {
@@ -15,6 +16,8 @@ class Product extends Model {
   num minCartLimit;
   num maxCartLimit;
 
+  final List<ProductImage> images;
+
   Product({
     super.id,
     super.name,
@@ -30,6 +33,7 @@ class Product extends Model {
     this.free,
     this.maxCartLimit=double.infinity,
     this.minCartLimit=1,
+    this.images = const [],
   });
 
   factory Product.fromMap(Map<String, dynamic> map) {
@@ -48,6 +52,7 @@ class Product extends Model {
       free: map['free'],
       maxCartLimit: map['maxCartLimit'],
       minCartLimit: map['minCartLimit'],
+      images: List.from(map['images']??[]).map((e) => ProductImage.fromMap(e)).toList(),
     );
   }
 
