@@ -9,7 +9,7 @@ import '../models/orders/order.dart';
 import '../services/auth_service.dart';
 
 class OrderRepository extends Repository<Order> {
-  OrderRepository() : super(path: "/users/orders");
+  OrderRepository() : super(path: "/orders");
 
   @override
   Order converter(Map<String, dynamic> map) {
@@ -23,7 +23,7 @@ class OrderRepository extends Repository<Order> {
   }
 
   Future<Order> addOrder(Order order) async {
-    Response response = await post("/add", order.toMap());
+    Response response = await post("/me", order.toMap());
     var orderData = response.body["data"]["order"];
     return converter(orderData);
   }

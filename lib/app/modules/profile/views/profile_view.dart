@@ -71,7 +71,9 @@ class ProfileView extends GetView<ProfileController> {
             title: const Text("Orders"),
             subtitle: const Text("Check your order status"),
             trailing: const Icon(IconlyLight.arrow_right_2),
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Routes.ORDERS);
+            },
           ),
           ListTile(
             leading: const SizedBox(
