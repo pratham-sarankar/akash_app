@@ -1,3 +1,4 @@
+import 'package:akash/app/data/repositories/order_repository.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,10 +15,10 @@ class OrdersView extends GetView<OrdersController> {
         centerTitle: true,
       ),
       body: Center(
-        child: Text(
-          'OrdersView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+        child: TextButton(onPressed: (){
+          var orderRepository =OrderRepository().getOrders();
+          print(orderRepository);
+        }, child: const Text('OrdersView')),
       ),
     );
   }
